@@ -45,6 +45,30 @@ def story_add():
             return jsonify({"Message":"This category does not exist."})
     except BaseException as err:
         return handle_error(err)
+    
+@story_routes.route("<int:id>", methods=["PUT"])
+@login_required
+def update_stories(id):
+    try:
+        story = Story.query.get(id)
+        if story:
+            request_body = request.json
+            title = request_body.get("title")
+            content = request_body.get("content")
+            if int(story.user_id) == int(session["_user_id"]):
+                story.title = title
+                story.content = content
+                story.updated_at = datetime.now()
+                db.session.commit()
+                check_story = Story.query.get(id)
+                return jsonify(check_story.to_dict())
+        else:
+            return jsonify({"Message":"This story does not exist."})
+
+                
+                
+    except BaseException as err:
+        return handle_error(err)
 
 @story_routes.route("/", methods=["GET"])
 def story_all():
