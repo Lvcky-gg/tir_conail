@@ -69,6 +69,27 @@ def update_stories(id):
                 
     except BaseException as err:
         return handle_error(err)
+    
+@story_routes.route("<int:id>", methods=["DELETE"])
+@login_required
+def delete_story(id):
+    try:
+        story = Story.query.get(id)
+        if story:
+            user_id = int(story.user_id)
+            session_id = int(session["_user_id"])
+            if user_id == session_id:
+                Story.query.filter_by(id=id).delete()
+                db.session.commit()
+                return jsonify({"Message":"Success", "Status":"200"}),200
+            else:
+                return jsonify({"Message": "Unauthorized User", "status": "403"}), 403
+        else:
+            return jsonify({"Message":"Story could not be found.", "status": "404"}), 404
+
+    except BaseException as err:
+        return handle_error(err)
+    
 
 @story_routes.route("/", methods=["GET"])
 def story_all():
