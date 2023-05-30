@@ -14,6 +14,7 @@ import InputBase from '@mui/material/InputBase';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 
+
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   right:'3%',
@@ -65,7 +66,7 @@ export default function SearchAppBar() {
 		color="primary"
 		onClick={(e)=>{
 			e.preventDefault()
-			console.log("hi")
+			
 		}}
 		>
           <IconButton
