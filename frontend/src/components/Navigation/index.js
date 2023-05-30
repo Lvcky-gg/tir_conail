@@ -59,7 +59,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function SearchAppBar() {
+	const user = useSelector((state)=>state.session.user)
   return (
+	
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar
@@ -95,7 +97,9 @@ export default function SearchAppBar() {
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
-		  <ProfileButton></ProfileButton>
+		  <ProfileButton
+		  user={user}
+		  ></ProfileButton>
         </Toolbar>
       </AppBar>
     </Box>

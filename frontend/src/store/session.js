@@ -30,6 +30,7 @@ export const sessionSlice = createSlice({
                 state.error = null;
             })
             .addCase(login.fulfilled, (state, action) => {
+				
                 state.user = action.payload;
                 state.error = null;
                 state.validationErrors = null;
@@ -96,6 +97,7 @@ export const login = createAsyncThunk(
             });
 
             const data = await response.json();
+			console.log(data)
 
             if (!response.ok) {
                 if (data.errors) {
@@ -103,7 +105,7 @@ export const login = createAsyncThunk(
                 }
             }
 
-            return data.user;
+            return data;
         } catch (error) {
             return rejectWithValue({ message: error.message });
         }
