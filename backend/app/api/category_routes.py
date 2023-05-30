@@ -2,6 +2,13 @@ from flask import Blueprint, jsonify, session, request
 from flask_login import login_required, current_user
 from app.models import Category, db
 from datetime import datetime
+from ..models.utils import (
+    BaseException,
+    ValidationException,
+    NotFoundException,
+    ForbiddenException,
+    handle_error,
+)
 
 category_routes = Blueprint('category', __name__)
 
@@ -58,3 +65,9 @@ def update_categories(id):
             return jsonify({"message": "Unauthorized User", "status": "403"}), 403
     else:
         return jsonify({"message": "Category couldn't be found", "statusCode": 404}), 404
+    
+# @category_routes.route("/<int:id>", methods=["DELETE"])
+# @login_required
+# def delete_category(id):
+#     try:
+#         Category
