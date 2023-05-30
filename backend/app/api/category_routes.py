@@ -66,8 +66,18 @@ def update_categories(id):
     else:
         return jsonify({"message": "Category couldn't be found", "statusCode": 404}), 404
     
-# @category_routes.route("/<int:id>", methods=["DELETE"])
-# @login_required
-# def delete_category(id):
-#     try:
-#         Category
+@category_routes.route("/<int:id>", methods=["DELETE"])
+@login_required
+def delete_category(id):
+    category = Category.query.get(id)
+    if category:
+        user_id = int(category.user_id)
+        session_id = int(session["_user_id"])
+        if user_id == session_id:
+            Category.query.filter_by(id=id).delete()
+            db.session.commit()
+            return jsonify({"message": "success", "status": "200"}), 200
+        else:
+            return jsonify({"message": "Unauthorized User", "status": "403"}), 403
+    else:
+        return jsonify({"message": "Cateory couldn't be found", "statusCode": 404}), 404
