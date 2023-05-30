@@ -5,12 +5,70 @@ import OpenModalButton from '../OpenModalButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import { login } from '../../store/session';
+import { Button, formHelperTextClasses, MenuItem } from '@mui/material';
+import Menu from '@mui/material/Menu';
+import { styled, alpha } from '@mui/material/styles';
+
+
+const StyledMenu = styled((props) => (
+  
+  <Menu
+    elevation={0}
+    anchorOrigin={{
+      vertical: 'bottom',
+      horizontal: 'right',
+    }}
+    transformOrigin={{
+      vertical: 'top',
+      horizontal: 'right',
+    }}
+    {...props}
+  />
+))(({ theme }) => ({
+  '& .MuiPaper-root': {
+    borderRadius: 6,
+    marginTop: theme.spacing(3.5),
+    minWidth: 180,
+    color:
+      theme.palette.mode === 'light' ? '#3c3c3c' : '#3c3c3c',
+    display:'flex',
+    justifyContent:'center',
+    alignItems:'center',
+    boxShadow:
+      'rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px',
+    '& .MuiMenu-list': {
+      padding: '4px 0',
+    },
+    '& .MuiMenuItem-root': {
+      '& .MuiSvgIcon-root': {
+        fontSize: 18,
+        color: theme.palette.text.secondary,
+        marginRight: theme.spacing(1.5),
+      },
+      '&:active': {
+        backgroundColor: alpha(
+          theme.palette.primary.main,
+          theme.palette.action.selectedOpacity,
+        ),
+      },
+    },
+  },
+}));
+
 
 
 function ProfileButton({ user }) {
     const dispatch = useDispatch();
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
+    const [anchorEl, setAnchorEl] = useState(null);
+    const open = Boolean(anchorEl);
+    const handleClick = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
 
     const openMenu = () => {
         if (showMenu) return;
@@ -49,26 +107,39 @@ function ProfileButton({ user }) {
         dispatch(login(credential));
         closeMenu();
     };
-
-    const ulClassName = 'profile-dropdown' + (showMenu ? '' : ' hidden');
+ 
 
     return (
-        <>
-            <button onClick={openMenu} className="modalButton">
+        <div
+        className="profile-provider">
+            <button 
+                    aria-controls={open ? 'demo-customized-button' : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? 'true' : undefined}
+                    onClick={handleClick}
+                     className="modalButton">
                 <i className="fas fa-user-circle" />
             </button>
-            <ul className={ulClassName} ref={ulRef}>
+            <StyledMenu 
+                    
+            anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          MenuListProps={{
+          'aria-labelledby': 'basic-button',
+        }} ref={ulRef}>
                 {user ? (
                     <>
                         <li>{user.username}</li>
                         <li>{user.email}</li>
                         <li className="button-container">
-                            <button
+                            <Button
+                            variant="contained"
                                 className="modalButton"
                                 onClick={handleLogout}
                             >
                                 Log Out
-                            </button>
+                            </Button>
                         </li>
                     </>
                 ) : (
@@ -92,17 +163,18 @@ function ProfileButton({ user }) {
                         </li>
 
                         <li className="button-container">
-                            <button
+                            <MenuItem
+                              variant="contained"
                                 className="modalButton"
                                 onClick={demoUserLogin}
                             >
                                 DemoUser
-                            </button>
+                            </MenuItem>
                         </li>
                     </>
                 )}
-            </ul>
-        </>
+            </StyledMenu>
+        </div>
     );
 }
 

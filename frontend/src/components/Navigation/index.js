@@ -2,6 +2,7 @@
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
+import { useState } from 'react';
 import './Navigation.css';
 import * as React from 'react';
 import { styled, alpha } from '@mui/material/styles';
@@ -13,6 +14,9 @@ import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
+import BasicSwitches from './switch';
+
+
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -58,8 +62,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function SearchAppBar() {
+
+export default function SearchAppBar({hidden, setHidden}) {
 	const user = useSelector((state)=>state.session.user)
+	console.log(hidden)
+	
   return (
 	
     <Box sx={{ flexGrow: 1 }}>
@@ -68,10 +75,11 @@ export default function SearchAppBar() {
 		color="primary"
 		onClick={(e)=>{
 			e.preventDefault()
+			setHidden(!hidden)
 			
 		}}
 		>
-          <IconButton
+          {/* <IconButton
             size="large"
             edge="start"
             color="secondary"
@@ -79,7 +87,8 @@ export default function SearchAppBar() {
             sx={{ mr: 2 }}
           >
             <MenuIcon />
-          </IconButton>
+			
+          </IconButton> */}
           <Typography
             variant="h6"
             noWrap
@@ -88,6 +97,7 @@ export default function SearchAppBar() {
           >
             Fort of the Foreigner
           </Typography>
+		  
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -97,11 +107,14 @@ export default function SearchAppBar() {
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
+		  {/* <BasicSwitches/> */}
+		 
 		  <ProfileButton
 		  user={user}
 		  ></ProfileButton>
         </Toolbar>
       </AppBar>
+	  
     </Box>
   );
 }

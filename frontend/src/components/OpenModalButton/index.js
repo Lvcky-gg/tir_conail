@@ -1,5 +1,7 @@
 import React from 'react';
 import { useModal } from '../../context/Modal';
+import { Button } from '@mui/material';
+import {MenuItem} from '@mui/material';
 
 function OpenModalButton({
   modalComponent, // component to render inside the modal
@@ -16,7 +18,10 @@ function OpenModalButton({
   };
 
   return (
-    <button onClick={onClick}>{buttonText}</button>
+    <MenuItem variant="contained" 
+    onClick={onClick}
+   
+    >{buttonText}</MenuItem>
   );
 }
 
