@@ -1,0 +1,15 @@
+.modalLogin{
+    margin:auto;
+}
+.loginForm>div{
+    width:fit-content;
+    padding:5%;
+}
+.loginForm{
+    width:fit-content;
+    margin:auto;
+    margin-top:30%;
+    /* position:relative;
+    left:20%;
+    bottom:50%; */
+}

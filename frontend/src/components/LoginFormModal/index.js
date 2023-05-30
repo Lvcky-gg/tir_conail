@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { login, clearErrors } from "../../store/session";
 import { useModal } from "../../context/Modal";
 import "./LoginForm.css";
-
+import { TextField } from "@mui/material";
+import Button from '@mui/material/Button';
 
 import validateInput from "../../utils/validateInput";
 
@@ -46,34 +47,42 @@ function LoginFormModal() {
   return (
     <div className="modalLogin">
       <form onSubmit={handleSubmit} className="loginForm">
-=-
         <div>
-          <label>Username or Password</label>
-          <input
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            // required
-          />
+        <TextField 
+        id="standard-basic" 
+        label="Email" 
+        variant="standard" 
+        type="text"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        InputLabelProps={{
+          style: { color: '#fff' },
+        }}
+        />
         </div>
         <div>
-          <label>Password</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            // required
-          />
+        <TextField 
+        id="standard-basic" 
+        label="Password" 
+        InputLabelProps={{
+          style: { color: '#fff' },
+        }}
+        variant="standard"
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+         />
         </div>
-        <div>
-          <button
+        
+          <Button
+          variant="contained"
             type="submit"
             id="specificButtonSize"
             className="specificButton"
           >
             Log In
-          </button>
-        </div>
+          </Button>
+        
       </form>
       <ul className="modal-form-list-err">
         {inputValidate &&
