@@ -31,5 +31,5 @@ class Story(db.Model):
             "category_id":self.category_id,
             "user_id":self.user_id,
             "user":self.user.to_dict(),
-            "category":self.category.to_dict()
+            # "category":self.category.to_dict()
         }

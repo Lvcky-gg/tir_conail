@@ -24,9 +24,11 @@ def category_by_id(id):
 
 @category_routes.route("/", methods=["GET"])
 def category_home():
-    categories = Category.query.all()
-
-    return {"Categories": [item.to_dict() for item in categories]}
+    try:
+        categories = Category.query.all()
+        return {"Categories": [item.to_dict() for item in categories]}
+    except BaseException as err:
+        return handle_error(err)
 
 @category_routes.route("/", methods=["POST"])
 @login_required

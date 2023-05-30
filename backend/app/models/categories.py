@@ -15,7 +15,7 @@ class Category(db.Model):
     )
 
     user = db.relationship("User", back_populates="user_categories")
-    category_stories = db.relationship("Story",back_populates="category")
+    category_stories = db.relationship("Story",back_populates="category", cascade="all, delete")
 
     def to_dict(self):
        return{
