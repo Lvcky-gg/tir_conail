@@ -13,9 +13,15 @@ import MailIcon from '@mui/icons-material/Mail';
 import { useState } from 'react';
 import { IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import { useEffect } from 'react';
 import './sidebar.css'
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllCategories } from '../../../store/categories';
 
 export default function TemporaryDrawer() {
+    const dispatch = useDispatch()
+    const categories = useSelector((state)=>state.categories.allCategories.Categories)
+
   const [state, setState] = useState({
     top: false,
     left: false,
@@ -31,6 +37,9 @@ export default function TemporaryDrawer() {
     setState({ ...state, [anchor]: open });
   };
 
+  useEffect(()=>{
+    dispatch(getAllCategories())
+  },[dispatch])
  const list = (anchor) => (
     <Box
       sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
@@ -39,28 +48,12 @@ export default function TemporaryDrawer() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem key={text} disablePadding>
+        { categories?.map((category, id) => (
+          <ListItem key={id} disablePadding>
             <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText primary={category.name.toString()} />
             </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
+          </ListItem>  
         ))}
       </List>
     </Box>
