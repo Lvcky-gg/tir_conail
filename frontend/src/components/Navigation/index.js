@@ -85,6 +85,7 @@ export default function SearchAppBar({hidden, setHidden}) {
 			
 		}}
 		>
+			<TemporaryDrawer></TemporaryDrawer>
 
           <Typography
             variant="h6"

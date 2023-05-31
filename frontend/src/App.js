@@ -21,7 +21,7 @@ function App({hidden, setHidden, hiddenTwo,}) {
     <div>
       <Navigation isLoaded={isLoaded} hidden={hidden} setHidden={setHidden}/>
      
-       <TemporaryDrawer/>
+       {/* <TemporaryDrawer/> */}
      
    
    
