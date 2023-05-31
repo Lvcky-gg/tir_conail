@@ -72,10 +72,6 @@ export default function TemporaryDrawer() {
         <React.Fragment key={anchor}>
           
           <IconButton
-        //     style={{position:"absolute",
-        //     bottom:"93.8%",
-        //     left:"1%"
-        // }}
             className="iconButton"
             size="large"
             edge="start"
@@ -88,6 +84,12 @@ export default function TemporaryDrawer() {
 			
           </IconButton>
           <Drawer
+              PaperProps={{
+                sx: {
+                  backgroundColor: "#3c3c3c",
+                  color: "white",
+                }
+              }}
             anchor={anchor}
             open={state[anchor]}
             onClose={toggleDrawer(anchor, false)}
