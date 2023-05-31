@@ -2,7 +2,7 @@
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
-import { useState } from 'react';
+import { useState} from 'react';
 import './Navigation.css';
 import * as React from 'react';
 import { styled, alpha } from '@mui/material/styles';
@@ -15,6 +15,11 @@ import InputBase from '@mui/material/InputBase';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import BasicSwitches from './switch';
+import TemporaryDrawer from './sidebar/Sidebar';
+import { Drawer } from '@mui/material';
+
+
+
 
 
 
@@ -65,7 +70,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function SearchAppBar({hidden, setHidden}) {
 	const user = useSelector((state)=>state.session.user)
-	console.log(hidden)
+	
+
 	
   return (
 	
@@ -79,23 +85,16 @@ export default function SearchAppBar({hidden, setHidden}) {
 			
 		}}
 		>
-          {/* <IconButton
-            size="large"
-            edge="start"
-            color="secondary"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-			
-          </IconButton> */}
+
           <Typography
             variant="h6"
             noWrap
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+			style={{marginLeft:"3%"
+        }}
           >
-            Fort of the Foreigner
+            Dn na nGall
           </Typography>
 		  
           <Search>
@@ -112,8 +111,11 @@ export default function SearchAppBar({hidden, setHidden}) {
 		  <ProfileButton
 		  user={user}
 		  ></ProfileButton>
+
+
         </Toolbar>
       </AppBar>
+
 	  
     </Box>
   );

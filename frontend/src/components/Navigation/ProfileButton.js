@@ -8,6 +8,7 @@ import { login } from '../../store/session';
 import { Button, formHelperTextClasses, MenuItem } from '@mui/material';
 import Menu from '@mui/material/Menu';
 import { styled, alpha } from '@mui/material/styles';
+import Avatar from '@mui/material/Avatar';
 
 
 const StyledMenu = styled((props) => (
@@ -111,15 +112,18 @@ function ProfileButton({ user }) {
 
     return (
         <div
-        className="profile-provider">
-            <button 
-                    aria-controls={open ? 'demo-customized-button' : undefined}
-                    aria-haspopup="true"
-                    aria-expanded={open ? 'true' : undefined}
-                    onClick={handleClick}
-                     className="modalButton">
-                <i className="fas fa-user-circle" />
-            </button>
+        className="profile-provider"> 
+      <Avatar
+        color="secondary"
+        alt="Remy Sharp"
+        aria-controls={open ? 'demo-customized-button' : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : undefined}
+        onClick={handleClick}
+
+      >
+        <i className="fas fa-user-circle" />
+      </Avatar>
             <StyledMenu 
                     
             anchorEl={anchorEl}
@@ -130,9 +134,9 @@ function ProfileButton({ user }) {
         }} ref={ulRef}>
                 {user ? (
                     <>
-                        <li>{user.username}</li>
-                        <li>{user.email}</li>
-                        <li className="button-container">
+                        <p>{user.username}</p>
+                        <p>{user.email}</p>
+                        {/* <p className="button-container"> */}
                             <Button
                             variant="contained"
                                 className="modalButton"
@@ -140,7 +144,7 @@ function ProfileButton({ user }) {
                             >
                                 Log Out
                             </Button>
-                        </li>
+                        {/* </li> */}
                     </>
                 ) : (
                     <>
