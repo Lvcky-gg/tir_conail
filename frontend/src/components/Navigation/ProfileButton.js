@@ -127,10 +127,10 @@ function ProfileButton({ user }) {
         ref={ulRef}
       >
         {user ? (
-          <>
+          <div>
             <p>{user.username}</p>
             <p>{user.email}</p>
-            {/* <p className="button-container"> */}
+       
             <Button
               variant="contained"
               className="modalButton"
@@ -138,8 +138,8 @@ function ProfileButton({ user }) {
             >
               Log Out
             </Button>
-            {/* </li> */}
-          </>
+         
+          </div>
         ) : (
           <>
             <li className="button-container">

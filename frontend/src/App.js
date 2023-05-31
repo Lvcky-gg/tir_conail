@@ -5,6 +5,7 @@ import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
+import { Home } from "./components/home";
 import TemporaryDrawer from "./components/Navigation/sidebar/Sidebar";
 // import List from "./components/Navigation/sidebar"
 const drawerWidth = 240;
@@ -29,6 +30,10 @@ function App({hidden, setHidden, hiddenTwo,}) {
         <Switch>
           <Route path="/login" >
             <LoginFormPage />
+          </Route>
+          <Route path="/" >
+            <Home></Home>
+      
           </Route>
           <Route path="/signup">
             <SignupFormPage />
