@@ -72,10 +72,10 @@ export default function TemporaryDrawer() {
         <React.Fragment key={anchor}>
           
           <IconButton
-            style={{position:"absolute",
-            bottom:"93.8%",
-            left:"1%"
-        }}
+        //     style={{position:"absolute",
+        //     bottom:"93.8%",
+        //     left:"1%"
+        // }}
             className="iconButton"
             size="large"
             edge="start"
